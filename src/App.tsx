@@ -28,6 +28,8 @@ import ContactPage from '@/pages/ContactPage';
 import CustomerOrderHistory from '@/pages/CustomerOrderHistory';
 import PortfolioPage from '@/pages/PortfolioPage';
 import OrderDetailPage from '@/pages/OrderDetailPage';
+import PrivacyPolicyPage from '@/pages/PrivacyPolicyPage';
+import TermsOfServicePage from '@/pages/TermsOfServicePage';
 import NotFound from '@/pages/NotFound';
 
 // Create QueryClient instance with optimized settings for performance
@@ -85,6 +87,8 @@ function App() {
                           } />
                           <Route path="/contact" element={<ContactPage />} />
                           <Route path="/portfolio" element={<PortfolioPage />} />
+                          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+                          <Route path="/terms-of-service" element={<TermsOfServicePage />} />
                           <Route path="/admin/*" element={
                             <ProtectedRoute requiredRole="admin">
                               <AdminLayout />

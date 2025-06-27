@@ -1,11 +1,10 @@
-
 import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { useRateLimiting } from './useRateLimiting';
 import { useSessionCache } from './useSessionCache';
-import { validateEmail, validatePassword, sanitizeText, generateCSRFToken, setCSRFToken } from '@/utils/security';
+import { validateEmail, validatePassword, sanitizeText } from '@/utils/security';
 
 export interface AuthSession {
   id: string;
@@ -48,17 +47,10 @@ export const useEnhancedAuth = () => {
     try {
       const redirectUrl = `${window.location.origin}/`;
       
-      // Generate CSRF token for OAuth flow
-      const csrfToken = generateCSRFToken();
-      setCSRFToken(csrfToken);
-      
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: redirectUrl,
-          queryParams: {
-            state: csrfToken
-          }
+          redirectTo: redirectUrl
         },
       });
 
